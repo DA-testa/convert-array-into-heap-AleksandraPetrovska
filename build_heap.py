@@ -1,11 +1,26 @@
 # python3
-
+# Aleksandra Petrovska 221RDB253
 
 def build_heap(data):
     swaps = []
     # TODO: Creat heap and heap sort
     # try to achieve  O(n) and not O(n2)
+    def heap_sort(i):
+        m_index = i
+        l = 2 * i + 1
+        if l < len(data) and data[l] < data[m_index]:
+            m_index = l
+        r = 2 * i + 2
+        if r < len(data) and data[r] < data[m_index]:
+            m_index = r
+        if i != m_index:
+            swaps.append((i, m_index))
+            data[i], data[m_index] = data[m_index], data[i]
+            heap_sort(m_index)
 
+    n = len(data)
+    for i in range(n // 2, -1, -1):
+        heap_sort(i)
 
     return swaps
 
@@ -30,6 +45,7 @@ def main():
 
     # TODO: output how many swaps were made, 
     # this number should be less than 4n (less than 4*len(data))
+    assert len(swaps) <= 4 * n
 
 
     # output all swaps
